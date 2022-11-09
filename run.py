@@ -24,4 +24,31 @@ SHEET = GSPREAD_CLIENT.open("expense-tracker")
 
 sales = SHEET.worksheet("income")
 data = sales.get_all_values()
-print(data)
+# print(data)
+
+
+def main():
+    """
+    This is the main function that loads on startup. It asks the user what
+    option they wish to take.
+    """
+    print("Hey there! what would you like to do today?")
+    print("The following options are available to you!\n")
+    print("Option 1 - Show expenses and income")
+    print("Option 2 - Input Your Income / Expenses")
+    print("Option 3 - Exit\n")
+    print("Please input a value '1', '2' or '3' to select an option: ")
+    option = int(input())
+    while option != 4:
+        if option == 1:
+            x = 1  # show expenses and income
+        elif option == 2:
+            x = 2  # allow user to input income / expenses
+        elif option == 3:
+            break
+        else:
+            print("you gave the wrong value")
+            break
+
+
+main()
