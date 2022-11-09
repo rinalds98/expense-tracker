@@ -4,6 +4,7 @@ expenses and income. The user can input their incoem and expenses in the
 terminal. Check how much they have spent or saved.
 """
 
+from datetime import date
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -22,9 +23,34 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("expense-tracker")
 
 
-sales = SHEET.worksheet("income")
-data = sales.get_all_values()
-# print(data)
+expense_tracker = SHEET.worksheet("income")
+
+data = expense_tracker.get_all_values()
+today = date.today()
+day = today.strftime("%m/%d/%Y")
+
+
+def input_expenses():
+    """
+    Asks the user to input their expenses so it can be added to the
+    google worksheet
+    """
+
+    print("Please select What type of expense you wish to add")
+    print("1.Entertainment\n2.Bills\n3.Food\n4.Transportation")
+
+    options = ["entertainment", "bills", "food", "transportation"]
+    stuff = [day]
+
+    choice = int(input()) - 1
+    stuff.append(options[choice])
+
+    print("Please input the amount")
+    amount = int(input())
+    stuff.append(amount)
+
+    worksheet_to_update = SHEET.worksheet("expenses")
+    worksheet_to_update.append_row(stuff)
 
 
 def get_money():
@@ -64,12 +90,13 @@ def main():
     option = int(input())
     while True:
         if option == 1:
-            get_money()
+            get_money()  # prints the total income/expenses
             print("Thank you for using this service.\nGoodbye!")
             break
-        # elif option == 2:
-        #  x = 2  # allow user to input income / expenses
-        # break
+        elif option == 2:
+            input_expenses()  # allow user to input income / expenses
+            print("thank you")
+            break
         # elif option == 3:
         # break
         # else:
