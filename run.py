@@ -27,6 +27,29 @@ data = sales.get_all_values()
 # print(data)
 
 
+def get_money():
+    """
+    Calculates The total income and expenses from the google spreadsheet
+    """
+    income = SHEET.worksheet("income").col_values(3)
+    income.pop(0)
+
+    result_one = 0
+    for i in income:
+        result_one += int(i)
+
+    expenses = SHEET.worksheet("expenses").col_values(3)
+    expenses.pop(0)
+
+    result_two = 0
+    for i in expenses:
+        result_two += int(i)
+
+    print(f"Total income: {result_one},Total Expenses: {result_two}\n")
+    savings = result_one - result_two
+    print(f"You have currently saved: {savings}")
+
+
 def main():
     """
     This is the main function that loads on startup. It asks the user what
@@ -39,16 +62,19 @@ def main():
     print("Option 3 - Exit\n")
     print("Please input a value '1', '2' or '3' to select an option: ")
     option = int(input())
-    while option != 4:
+    while True:
         if option == 1:
-            x = 1  # show expenses and income
-        elif option == 2:
-            x = 2  # allow user to input income / expenses
-        elif option == 3:
+            get_money()
+            print("Thank you for using this service.\nGoodbye!")
             break
-        else:
-            print("you gave the wrong value")
-            break
+        # elif option == 2:
+        #  x = 2  # allow user to input income / expenses
+        # break
+        # elif option == 3:
+        # break
+        # else:
+        #  print("you gave the wrong value")
+        # break
 
 
 main()
