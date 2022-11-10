@@ -4,7 +4,7 @@ expenses and income. The user can input their incoem and expenses in the
 terminal. Check how much they have spent or saved.
 """
 
-from datetime import date
+from datetime import datetime, timedelta, date
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -85,6 +85,38 @@ def get_money():
     input("Press Enter to go back to the main menu...\n")
 
 
+def specific_time_checker():
+    print("1.Income or 2.expense?")
+    valid = 3
+    answer = validate_value(valid)
+    if answer == 1:
+        sheet = "income"
+    if answer == 2:
+        sheet = "expenses"
+
+    print("Chose how many days back you want to see ie.")
+    print("'7' for 7 days or '30' for 30 days")
+    days = int(input())
+    data = SHEET.worksheet(sheet).get_all_values()
+    data.pop(0)
+
+    past = date.today() - timedelta(days)
+    newlist = []
+    for i, j, k in reversed(data):
+        date_str = i
+        date_object = datetime.strptime(date_str, '%m/%d/%Y').date()
+        if past < date_object:
+            newlist.append(int(k))
+    money = 0
+    for amount in newlist:
+        money += amount
+    if sheet == "income":
+        print(f"You have earned €{money} in the last {days} days")
+    else:
+        print(f"You have spent €{money} in the last {days} days")
+    input("Press Enter to go back to the main menu...\n")
+
+
 def update_worksheet(data, worksheet):
     """
     Receives a list containing (date,type of expense and amount)
@@ -131,9 +163,10 @@ def main():
         print("The following options are available to you!\n")
         print("Option 1 - Show expenses and income")
         print("Option 2 - Input Your Income / Expenses")
-        print("Option 3 - Exit\n")
-        print("Please input a value '1', '2' or '3' to select an option: ")
-        valid = 4
+        print("Option 3 - Check specific days ago")
+        print("Option 4 - Exit")
+        print("Please input a value '1', '2', '3' or '4' to select an option:")
+        valid = 5
         option = validate_value(valid)
 
         if option == 1:
@@ -146,6 +179,10 @@ def main():
             print("Thank you for using this service.\n")
             continue
         elif option == 3:
+            specific_time_checker()
+            print("Thank you for using this service.\n")
+            continue
+        elif option == 4:
             break
 
 
