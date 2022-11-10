@@ -34,8 +34,8 @@ def input_income_expense():
     income_options = ["salary", "other"]
     expense_options = ["entertainment", "bills", "food", "transportation"]
     print("1.Income or 2.expense?")
-
-    answer = validate_value()
+    valid = 3
+    answer = validate_value(valid)
     if answer == 1:
         options = income_options
         worksheet = "income"
@@ -48,12 +48,13 @@ def input_income_expense():
         print("1.Entertainment\n2.Bills\n3.Food\n4.Transportation")
 
     data = [DAY]
-
-    choice = validate_value() - 1
-    data.append(options[choice])
+    valid = len(options) + 1
+    choice = validate_value(valid)
+    data.append(options[choice - 1])
 
     print("Please input the amount")
-    amount = validate_value()
+    valid = 99999
+    amount = validate_value(valid)
     data.append(amount)
 
     return data, worksheet
@@ -75,7 +76,7 @@ def get_money():
     for i in expenses:
         result_two += int(i)
 
-    print(f"Total income: €{result_one},Total Expenses: €{result_two}\n")
+    print(f"Total income: €{result_one}, Total Expenses: €{result_two}\n")
     savings = result_one - result_two
     print(f"You have currently saved: €{savings}")
 
@@ -90,7 +91,7 @@ def update_worksheet(data, worksheet):
     print("Update successful")
 
 
-def validate_value():
+def validate_value(valid):
     """
     Checks if the users input to see if its
     a valid number
@@ -98,9 +99,15 @@ def validate_value():
     while True:
         try:
             value = int(input())
-            return value
+
         except ValueError:
             print("Please input a valid value")
+            continue
+
+        if value < valid:
+            return value
+        else:
+            print("Sorry, not an available option")
             continue
 
 
@@ -117,16 +124,17 @@ def main():
         print("Option 2 - Input Your Income / Expenses")
         print("Option 3 - Exit\n")
         print("Please input a value '1', '2' or '3' to select an option: ")
-        option = validate_value()
+        valid = 4
+        option = validate_value(valid)
 
         if option == 1:
             get_money()  # prints the total income/expenses
-            print("Thank you for using this service.")
+            print("Thank you for using this service.\n")
             continue
         elif option == 2:
             data, worksheet = input_income_expense()
             update_worksheet(data, worksheet)
-            print("Thank you for using this service.")
+            print("Thank you for using this service.\n")
             continue
         elif option == 3:
             break
