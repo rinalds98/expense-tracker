@@ -22,8 +22,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("expense_tracker")
 
-today = date.today()
-day = today.strftime("%m/%d/%Y")
+TODAY = date.today()
+DAY = TODAY.strftime("%m/%d/%Y")
 
 
 def input_income_expense():
@@ -49,7 +49,7 @@ def input_income_expense():
     else:
         print("cry")
 
-    data = [day]
+    data = [DAY]
 
     choice = int(input()) - 1
     data.append(options[choice])
@@ -86,8 +86,10 @@ def update_worksheet(data, worksheet):
     """
     Updates the google worksheet of income/expense that the user added
     """
+    print("Updating Worksheet...")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
+    print("Update successful")
 
 
 def main():
@@ -96,28 +98,30 @@ def main():
     option they wish to do.
     """
     print("Hey there! what would you like to do today?")
-    print("The following options are available to you!\n")
-    print("Option 1 - Show expenses and income")
-    print("Option 2 - Input Your Income / Expenses")
-    print("Option 3 - Exit\n")
-    print("Please input a value '1', '2' or '3' to select an option: ")
-    
-    option = int(input())
+
     while True:
+        print("The following options are available to you!\n")
+        print("Option 1 - Show expenses and income")
+        print("Option 2 - Input Your Income / Expenses")
+        print("Option 3 - Exit\n")
+        print("Please input a value '1', '2' or '3' to select an option: ")
+
+        option = int(input())
         if option == 1:
             get_money()  # prints the total income/expenses
-            print("Thank you for using this service.\nGoodbye!")
-            break
+            print("Thank you for using this service.")
+            continue
         elif option == 2:
             data, worksheet = input_income_expense()
             update_worksheet(data, worksheet)
-            print("thank you")
-            break
+            print("Thank you for using this service.")
+            continue
         elif option == 3:
             break
         else:
             print("you gave the wrong value")
-            break
+            print("Try again")
+            continue
 
 
 main()
