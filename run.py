@@ -20,7 +20,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open("expense-tracker")
+SHEET = GSPREAD_CLIENT.open("expense_tracker")
 
 
 expense_tracker = SHEET.worksheet("income")
@@ -50,6 +50,29 @@ def input_expenses():
     stuff.append(amount)
 
     worksheet_to_update = SHEET.worksheet("expenses")
+    worksheet_to_update.append_row(stuff)
+
+
+def input_income():
+    """
+    Asks the user to input their income so it can be added to the
+    google worksheet
+    """
+
+    print("Please select What type of income you wish to add")
+    print("1.Salary\n2.Other")
+
+    options = ["salary", "other"]
+    stuff = [day]
+
+    choice = int(input()) - 1
+    stuff.append(options[choice])
+
+    print("Please input the amount")
+    amount = int(input())
+    stuff.append(amount)
+
+    worksheet_to_update = SHEET.worksheet("income")
     worksheet_to_update.append_row(stuff)
 
 
@@ -94,14 +117,14 @@ def main():
             print("Thank you for using this service.\nGoodbye!")
             break
         elif option == 2:
-            input_expenses()  # allow user to input income / expenses
+            input_income()  # allow user to input income / expenses
             print("thank you")
             break
-        # elif option == 3:
-        # break
-        # else:
-        #  print("you gave the wrong value")
-        # break
+        elif option == 3:
+            break
+        else:
+            print("you gave the wrong value")
+            break
 
 
 main()
