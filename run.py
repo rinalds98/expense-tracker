@@ -28,8 +28,9 @@ DAY = TODAY.strftime("%m/%d/%Y")
 
 def input_income_expense():
     """
-    Asks the user to input their income or expense so it can be added
-    to the google worksheet
+    Asks the user if they want to input income or expenses. Once they
+    have selected the program asks the user what type and the amount
+    data gets validated by the "validate_value" function.
     """
     income_options = ["salary", "other"]
     expense_options = ["entertainment", "bills", "food", "transportation"]
@@ -62,7 +63,9 @@ def input_income_expense():
 
 def get_money():
     """
-    Calculates The total income and expenses from the google spreadsheet
+    Takes the values from both income and expenses worksheets
+    (from google sheets) and calculates the total income/expenses.
+    Also calculates the amount saved.
     """
     income = SHEET.worksheet("income").col_values(3)
     income.pop(0)
@@ -83,7 +86,8 @@ def get_money():
 
 def update_worksheet(data, worksheet):
     """
-    Updates the google worksheet of income/expense that the user added
+    Receives a list containing (date,type of expense and amount)
+    that are to be inserted in the relevant worksheet.
     """
     print("Updating Worksheet...")
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -93,8 +97,9 @@ def update_worksheet(data, worksheet):
 
 def validate_value(valid):
     """
-    Checks if the users input to see if its
-    a valid number
+    Inside the try, asks to input an integer value
+    Raises ValueError if anything but an integers is added
+    and if its within the range of options.
     """
     while True:
         try:
@@ -113,8 +118,11 @@ def validate_value(valid):
 
 def main():
     """
-    This is the main function that loads on startup. It asks the user what
-    option they wish to do.
+    This is the main function that loads on startup. it prints
+    what options are available to the user. When the user
+    types in a value, it gets checked to see if its a valid option.
+    It then calls the correct function that the user selected. When the
+    user is done, they have an option to exit the program.
     """
     print("Hey there! what would you like to do today?")
 
@@ -128,7 +136,7 @@ def main():
         option = validate_value(valid)
 
         if option == 1:
-            get_money()  # prints the total income/expenses
+            get_money()
             print("Thank you for using this service.\n")
             continue
         elif option == 2:
