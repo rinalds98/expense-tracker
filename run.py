@@ -49,17 +49,16 @@ def input_income_expense():
     else:
         print("cry")
 
-    stuff = [day]
+    data = [day]
 
     choice = int(input()) - 1
-    stuff.append(options[choice])
+    data.append(options[choice])
 
     print("Please input the amount")
     amount = int(input())
-    stuff.append(amount)
+    data.append(amount)
 
-    worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(stuff)
+    return data, worksheet
 
 
 def get_money():
@@ -68,14 +67,12 @@ def get_money():
     """
     income = SHEET.worksheet("income").col_values(3)
     income.pop(0)
-
     result_one = 0
     for i in income:
         result_one += int(i)
 
     expenses = SHEET.worksheet("expenses").col_values(3)
     expenses.pop(0)
-
     result_two = 0
     for i in expenses:
         result_two += int(i)
@@ -85,10 +82,18 @@ def get_money():
     print(f"You have currently saved: {savings}")
 
 
+def update_worksheet(data, worksheet):
+    """
+    Updates the google worksheet of income/expense that the user added
+    """
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+
+
 def main():
     """
     This is the main function that loads on startup. It asks the user what
-    option they wish to take.
+    option they wish to do.
     """
     print("Hey there! what would you like to do today?")
     print("The following options are available to you!\n")
@@ -96,6 +101,7 @@ def main():
     print("Option 2 - Input Your Income / Expenses")
     print("Option 3 - Exit\n")
     print("Please input a value '1', '2' or '3' to select an option: ")
+    
     option = int(input())
     while True:
         if option == 1:
@@ -103,7 +109,8 @@ def main():
             print("Thank you for using this service.\nGoodbye!")
             break
         elif option == 2:
-            input_income_expense()  # allow user to input income / expenses
+            data, worksheet = input_income_expense()
+            update_worksheet(data, worksheet)
             print("thank you")
             break
         elif option == 3:
