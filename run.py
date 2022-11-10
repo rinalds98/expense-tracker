@@ -81,7 +81,8 @@ def get_money():
 
     print(f"Total income: €{result_one}, Total Expenses: €{result_two}\n")
     savings = result_one - result_two
-    print(f"You have currently saved: €{savings}")
+    print(f"You have currently saved: €{savings}\n")
+    input("Press Enter to go back to the main menu...\n")
 
 
 def update_worksheet(data, worksheet):
