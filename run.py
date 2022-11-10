@@ -22,24 +22,33 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("expense_tracker")
 
-
-expense_tracker = SHEET.worksheet("income")
-
-data = expense_tracker.get_all_values()
 today = date.today()
 day = today.strftime("%m/%d/%Y")
 
 
-def input_expenses():
+def input_income_expense():
     """
-    Asks the user to input their expenses so it can be added to the
-    google worksheet
+    Asks the user to input their income or expense so it can be added
+    to the google worksheet
     """
+    income_options = ["salary", "other"]
+    expense_options = ["entertainment", "bills", "food", "transportation"]
+    print("1.Income or 2.expense?")
 
-    print("Please select What type of expense you wish to add")
-    print("1.Entertainment\n2.Bills\n3.Food\n4.Transportation")
+    answer = int(input())
+    if answer == 1:
+        options = income_options
+        worksheet = "income"
+        print("Please select What type of income you wish to add")
+        print("1.Salary\n2.Other")
+    elif answer == 2:
+        options = expense_options
+        worksheet = "expenses"
+        print("Please select What type of expense you wish to add")
+        print("1.Entertainment\n2.Bills\n3.Food\n4.Transportation")
+    else:
+        print("cry")
 
-    options = ["entertainment", "bills", "food", "transportation"]
     stuff = [day]
 
     choice = int(input()) - 1
@@ -49,30 +58,7 @@ def input_expenses():
     amount = int(input())
     stuff.append(amount)
 
-    worksheet_to_update = SHEET.worksheet("expenses")
-    worksheet_to_update.append_row(stuff)
-
-
-def input_income():
-    """
-    Asks the user to input their income so it can be added to the
-    google worksheet
-    """
-
-    print("Please select What type of income you wish to add")
-    print("1.Salary\n2.Other")
-
-    options = ["salary", "other"]
-    stuff = [day]
-
-    choice = int(input()) - 1
-    stuff.append(options[choice])
-
-    print("Please input the amount")
-    amount = int(input())
-    stuff.append(amount)
-
-    worksheet_to_update = SHEET.worksheet("income")
+    worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(stuff)
 
 
@@ -117,7 +103,7 @@ def main():
             print("Thank you for using this service.\nGoodbye!")
             break
         elif option == 2:
-            input_income()  # allow user to input income / expenses
+            input_income_expense()  # allow user to input income / expenses
             print("thank you")
             break
         elif option == 3:
