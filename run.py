@@ -29,12 +29,12 @@ DAY = TODAY.strftime("%m/%d/%Y")
 def input_income_expense():
     """
     Asks the user if they want to input income or expenses. Once they
-    have selected the program asks the user what type and the amount
-    data gets validated by the "validate_value" function.
+    have selected the program asks the user what type and the amount.
+    Data gets validated by the "validate_value" function.
     """
     income_options = ["salary", "other"]
     expense_options = ["entertainment", "bills", "food", "transportation"]
-    print("1.Income or 2.expense?")
+    print("1.Income or 2.Expense?")
     valid = 3
     answer = validate_value(valid)
     if answer == 1:
@@ -54,7 +54,7 @@ def input_income_expense():
     data.append(options[choice - 1])
 
     print("Please input the amount")
-    valid = 99999
+    valid = None
     amount = validate_value(valid)
     data.append(amount)
 
@@ -79,14 +79,20 @@ def get_money():
     for i in expenses:
         result_two += int(i)
 
-    print(f"Total income: €{result_one}, Total Expenses: €{result_two}\n")
+    print(f"Total Income: €{result_one}, Total Expenses: €{result_two}\n")
     savings = result_one - result_two
     print(f"You have currently saved: €{savings}\n")
     input("Press Enter to go back to the main menu...\n")
 
 
 def specific_time_checker():
-    print("1.Income or 2.expense?")
+    """
+    Asks the user if they wish to check their
+    income / expenses. The function allows the user
+    to check specific amount of days ago how much they
+    have spent or earned.
+    """
+    print("1.Income or 2.Expense?")
     valid = 3
     answer = validate_value(valid)
     if answer == 1:
@@ -142,7 +148,14 @@ def validate_value(valid):
             print("Please input a valid value")
             continue
 
-        if value < valid:
+        if valid is None:
+            if value <= 0:
+                print("Sorry, the amount can't be '0' or negative")
+                continue
+            else:
+                return value
+
+        if value < valid and value > 0:
             return value
         else:
             print("Sorry, not an available option")
