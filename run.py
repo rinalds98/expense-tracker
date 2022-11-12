@@ -3,7 +3,7 @@ This project is a simple expense tracker for personal use. It tracks the users
 expenses and income. The user can input their incoem and expenses in the
 terminal. Check how much they have spent or saved.
 """
-
+import os
 from datetime import datetime, timedelta, date
 import gspread
 from google.oauth2.service_account import Credentials
@@ -170,6 +170,7 @@ def main():
     It then calls the correct function that the user selected. When the
     user is done, they have an option to exit the program.
     """
+
     print("Hey there! what would you like to do today?")
 
     while True:
@@ -184,16 +185,16 @@ def main():
 
         if option == 1:
             get_money()
-            print("Thank you for using this service.\n")
+            os.system("clear")
             continue
         elif option == 2:
             data, worksheet = input_income_expense()
             update_worksheet(data, worksheet)
-            print("Thank you for using this service.\n")
+            os.system("clear")
             continue
         elif option == 3:
             specific_time_checker()
-            print("Thank you for using this service.\n")
+            os.system("clear")
             continue
         elif option == 4:
             break
