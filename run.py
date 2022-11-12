@@ -4,6 +4,7 @@ expenses and income. The user can input their incoem and expenses in the
 terminal. Check how much they have spent or saved.
 """
 import os
+from termcolor import colored, cprint
 from datetime import datetime, timedelta, date
 import gspread
 from google.oauth2.service_account import Credentials
@@ -24,6 +25,7 @@ SHEET = GSPREAD_CLIENT.open("expense_tracker")
 
 TODAY = date.today()
 DAY = TODAY.strftime("%m/%d/%Y")
+active_user = []
 
 
 def input_income_expense():
@@ -48,7 +50,7 @@ def input_income_expense():
         print("Please select What type of expense you wish to add")
         print("1.Entertainment\n2.Bills\n3.Food\n4.Transportation")
 
-    data = [DAY]
+    data = [active_user[0], DAY]
     valid = len(options) + 1
     choice = validate_value(valid)
     data.append(options[choice - 1])
@@ -145,12 +147,14 @@ def validate_value(valid):
             value = int(input())
 
         except ValueError:
-            print("Please input a valid value")
+            text = "Please input a valid value."
+            print(colored(text, "red", attrs=["reverse"]))
             continue
 
         if valid is None:
             if value <= 0:
-                print("Sorry, the amount can't be '0' or negative")
+                text = "Sorry, the amount can't be '0' or negative."
+                print(colored(text, "red", attrs=["reverse"]))
                 continue
             else:
                 return value
@@ -158,8 +162,46 @@ def validate_value(valid):
         if value < valid and value > 0:
             return value
         else:
-            print("Sorry, not an available option")
+            text = "Sorry, not an available option."
+            print(colored(text, "red", attrs=["reverse"]))
             continue
+
+
+def get_username():
+    usernames1 = SHEET.worksheet("expenses").col_values(1)  # expense list
+    usernames2 = SHEET.worksheet("income").col_values(1)
+
+    usernames1.pop(0)  # pop username text
+    usernames2.pop(0)  # pop username text
+    usernames = usernames1 + usernames2  # merge both lists together
+
+    users = []
+
+    def remove_dups(usernames):
+        """
+        strips usernames of any duplicates and
+        adds to new users list
+        """
+        for user in usernames:
+            if user not in users:
+                users.append(user)
+
+    remove_dups(usernames)
+
+    print("Please Enter Your Username!")
+    user = input()
+    if user in users:
+        active_user.append(user)
+        print(f"Welcome {user}!")
+    else:
+        print(f"would you like to use {user} as your username from now?")
+        print("press 'y' or 'n'")
+        answer = input()
+        if answer == "y":
+            active_user.append(user)
+            print("Done")
+        else:
+            print("thank you good bye")
 
 
 def main():
@@ -171,7 +213,9 @@ def main():
     user is done, they have an option to exit the program.
     """
 
-    print("Hey there! what would you like to do today?")
+    get_username()
+    print(active_user)
+    print(f"Hey {active_user[0]}! what would you like to do today?")
 
     while True:
         print("The following options are available to you!\n")
@@ -190,7 +234,7 @@ def main():
         elif option == 2:
             data, worksheet = input_income_expense()
             update_worksheet(data, worksheet)
-            os.system("clear")
+            # os.system("clear")
             continue
         elif option == 3:
             specific_time_checker()
@@ -201,3 +245,8 @@ def main():
 
 
 main()
+
+
+# text = colored("Hello, World!", "red", )
+# print(colored("Wrong Answer!", "red", attrs=["reverse"]))
+# print(text)
