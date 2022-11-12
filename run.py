@@ -171,6 +171,13 @@ def validate_value(valid):
 
 
 def get_username():
+    """
+    Asks user for their username and checks the google spreadsheet
+    if it has been used previously. If it has it welcomes them. If not
+    it creates it. the user gets added to a 'active users' variable which
+    is used to get that specific users data or input new data under
+    their username.
+    """
     usernames1 = SHEET.worksheet("expenses").col_values(1)  # expense list
     usernames2 = SHEET.worksheet("income").col_values(1)
 
@@ -217,7 +224,7 @@ def main():
     """
 
     get_username()
-    print(f"Hey {active_user[0]}! what would you like to do today?")
+    print("What would you like to do today?")
 
     while True:
         print("The following options are available to you!\n")
