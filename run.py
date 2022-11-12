@@ -69,17 +69,19 @@ def get_money():
     (from google sheets) and calculates the total income/expenses.
     Also calculates the amount saved.
     """
-    income = SHEET.worksheet("income").col_values(3)
+    income = SHEET.worksheet("income").get_all_values()
     income.pop(0)
     result_one = 0
-    for i in income:
-        result_one += int(i)
+    for i, j, k, l in income:
+        if i == active_user[0]:
+            result_one += int(l)
 
-    expenses = SHEET.worksheet("expenses").col_values(3)
+    expenses = SHEET.worksheet("expenses").get_all_values()
     expenses.pop(0)
     result_two = 0
-    for i in expenses:
-        result_two += int(i)
+    for i, j, k, l in expenses:
+        if i == active_user[0]:
+            result_two += int(l)
 
     print(f"Total Income: €{result_one}, Total Expenses: €{result_two}\n")
     savings = result_one - result_two
@@ -110,11 +112,12 @@ def specific_time_checker():
 
     past = date.today() - timedelta(days)
     newlist = []
-    for i, j, k in reversed(data):
-        date_str = i
-        date_object = datetime.strptime(date_str, '%m/%d/%Y').date()
-        if past < date_object:
-            newlist.append(int(k))
+    for i, j, k, l in reversed(data):
+        if i == active_user[0]:
+            date_str = j
+            date_object = datetime.strptime(date_str, '%m/%d/%Y').date()
+            if past < date_object:
+                newlist.append(int(l))
     money = 0
     for amount in newlist:
         money += amount
@@ -214,7 +217,6 @@ def main():
     """
 
     get_username()
-    print(active_user)
     print(f"Hey {active_user[0]}! what would you like to do today?")
 
     while True:
