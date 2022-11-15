@@ -87,8 +87,8 @@ def get_username(unique_users):
             os.system("clear")
             break
         else:
-            print(f"would you like to use {user} as your username from now?")
-            print("press 'Y' or 'N' to continue...")
+            print(f"Would you like to use {user} as your username?")
+            print("Press 'Y' or 'N' to continue...")
             answer = mini_validator()
             if answer == "y":
                 active_user.append(user)
@@ -98,7 +98,7 @@ def get_username(unique_users):
                 os.system("clear")
                 break
             elif answer == "n":
-                print("Would you like to input a different username?")
+                print("Would you like to use a different username?")
                 print("press 'Y' or 'N' to continue...")
                 answer = mini_validator()
                 if answer == "y":
