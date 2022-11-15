@@ -5,6 +5,7 @@ terminal. Check how much they have spent or saved.
 """
 
 import os
+import time
 from termcolor import colored, cprint
 from datetime import datetime, timedelta, date
 import gspread
@@ -58,21 +59,52 @@ def get_username(unique_users):
     is used to get that specific users data or input new data under
     their username.
     """
+    def mini_validator():
+        """
+        Helper function that checks and validates the values
+        that the users inputs as to not cause a value error.
+        """
+        dict = {
+            "yes": "y",
+            "no": "n"
+        }
 
-    print("Please Enter Your Username!")
-    user = input()
-    if user in unique_users:
-        active_user.append(user)
-        print(f"Welcome {user}!")
-    else:
-        print(f"would you like to use {user} as your username from now?")
-        print("press 'y' or 'n'")
-        answer = input()
-        if answer == "y":
+        while True:
+            answer = input()
+            if answer in dict.values():
+                return answer
+            else:
+                text = "Sorry, not an available option."
+                print(colored(text, "red", attrs=["reverse"]))
+
+    while True:
+        print("Please Enter Your Username!")
+        user = input()
+        if user in unique_users:
             active_user.append(user)
-            print("Done")
+            print(f"Welcome {user}!")
+            time.sleep(2)
+            os.system("clear")
+            break
         else:
-            print("thank you good bye")
+            print(f"would you like to use {user} as your username from now?")
+            print("press 'Y' or 'N' to continue...")
+            answer = mini_validator()
+            if answer == "y":
+                active_user.append(user)
+                print("Username added!")
+                print(f"Welcome {user}!")
+                time.sleep(2)
+                os.system("clear")
+                break
+            elif answer == "n":
+                print("Would you like to input a different username?")
+                print("press 'Y' or 'N' to continue...")
+                answer = mini_validator()
+                if answer == "y":
+                    continue
+                else:
+                    return answer
 
 
 def get_money(income, expenses):
@@ -183,6 +215,7 @@ def update_worksheet(data, worksheet):
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
     print("Update successful")
+    input("Press Enter to go back to the main menu...\n")
 
 
 def validate_value(valid):
@@ -225,13 +258,19 @@ def main():
     It then calls the correct function that the user selected. When the
     user is done, they have an option to exit the program.
     """
+
     print("Welcome to your personal expense tracker!")
     print("Please wait while we load everything up...")
     income_data, expense_data, unique_users = get_data()
-    get_username(unique_users)
+    time.sleep(1)
+    answer = get_username(unique_users)
     print("What would you like to do today?")
 
     while True:
+        if answer == "n":
+            print("Goodbye!")
+            break
+
         print("The following options are available to you!\n")
         print("Option 1 - Show expenses and income")
         print("Option 2 - Input Your Income / Expenses")
@@ -242,15 +281,19 @@ def main():
         option = validate_value(valid)
 
         if option == 1:
+            os.system("clear")
             get_money(income_data, expense_data)
             os.system("clear")
             continue
         elif option == 2:
+            os.system("clear")
             data, worksheet = input_income_expense()
             update_worksheet(data, worksheet)
-            # os.system("clear")
+            income_data, expense_data, unique_users = get_data()
+            os.system("clear")
             continue
         elif option == 3:
+            os.system("clear")
             specific_time_checker(income_data, expense_data)
             os.system("clear")
             continue
