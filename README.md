@@ -137,3 +137,17 @@ Deployment
 The live link can be found here [Expense Tracker](#livelink "Expense Tracker").
 
 <div id='technologies'/>
+
+Technologies Used
+=
+
+- ## Languages
+    - python
+
+- ## Modules
+    - OS Module - To clear the screen after specific actions done by the user to keep the terminal clean and tidy.
+    - Time Module - To keep track of time to be able to have income / expense entries witha  time stamp.
+    - Termcolor Module - To add color and visual design to the terminal
+    - Gspread Module and google.oauth2.service_account - To be able to access spreadsheet from google spreadsheet.
+
+<div id='credits'/>
