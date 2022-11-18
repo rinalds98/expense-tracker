@@ -78,28 +78,29 @@ def get_username(unique_users):
                 print(colored(text, "red", attrs=["reverse"]))
 
     while True:
-        print("Please Enter Your Username!")
+        cprint("Please Enter Your Username!", "cyan", attrs=["bold"])
         user = input()
         if user in unique_users:
             active_user.append(user)
-            print(f"Welcome {user}!")
+            cprint(f"Welcome {user}!", "cyan", attrs=["bold"])
             time.sleep(2)
             os.system("clear")
             break
         else:
-            print(f"Would you like to use {user} as your username?")
-            print("Press 'Y' or 'N' to continue...")
+            c_user = colored(user, "yellow", attrs=["bold"])
+            print(f"Would you like to use {c_user} as your username?")
+            cprint("Press 'Y' or 'N' to continue...", "yellow")
             answer = mini_validator()
             if answer == "y":
                 active_user.append(user)
-                print("Username added!")
-                print(f"Welcome {user}!")
+                cprint("Username added!", "green")
+                cprint(f"Welcome {user}!", "cyan", attrs=["bold"])
                 time.sleep(2)
                 os.system("clear")
                 break
             elif answer == "n":
                 print("Would you like to use a different username?")
-                print("press 'Y' or 'N' to continue...")
+                cprint("press 'Y' or 'N' to continue...", "yellow")
                 answer = mini_validator()
                 if answer == "y":
                     continue
@@ -118,14 +119,21 @@ def get_money(income, expenses):
     for i, j, k, l in income:
         if i == active_user[0]:
             result_one += int(l)
+    result_inc = colored(result_one, "green")
 
     result_two = 0
     for i, j, k, l in expenses:
         if i == active_user[0]:
             result_two += int(l)
+    result_exp = colored(result_two, "red")
 
-    print(f"Total Income: €{result_one}, Total Expenses: €{result_two}\n")
+    print(f"Total Income: €{result_inc}, Total Expenses: €{result_exp}")
     savings = result_one - result_two
+    if savings > 0:
+        savings = colored(savings, "green")
+    else:
+        savings = colored(savings, "red")
+
     print(f"You have currently saved: €{savings}\n")
     input("Press Enter to go back to the main menu...\n")
 
@@ -139,18 +147,24 @@ def input_income_expense():
 
     income_options = ["salary", "other"]
     expense_options = ["entertainment", "bills", "food", "transportation"]
-    print("1.Income or 2.Expense?")
+    inc = colored("1.Income", "green")
+    exp = colored("2.Expense", "red")
+    print(f"{inc} or {exp}?")
     valid = 2
     answer = validate_value(valid)
+
+    selection1 = "Please select What type of income you wish to add?"
+    selection2 = "Please select What type of expense you wish to add?"
+
     if answer == 1:
         options = income_options
         worksheet = "income"
-        print("Please select What type of income you wish to add")
+        print(colored(selection1, "cyan", attrs=["bold"]))
         print("1.Salary\n2.Other")
     if answer == 2:
         options = expense_options
         worksheet = "expenses"
-        print("Please select What type of expense you wish to add")
+        print(colored(selection2, "cyan", attrs=["bold"]))
         print("1.Entertainment\n2.Bills\n3.Food\n4.Transportation")
 
     data = [active_user[0], DAY]
@@ -158,7 +172,7 @@ def input_income_expense():
     choice = validate_value(valid)
     data.append(options[choice - 1])
 
-    print("Please input the amount")
+    cprint("Please input the amount", "cyan", attrs=["bold"])
     valid = None
     amount = validate_value(valid)
     data.append(amount)
@@ -173,8 +187,9 @@ def specific_time_checker(income, expenses):
     to check specific amount of days ago how much they
     have spent or earned.
     """
-
-    print("1.Income or 2.Expense?")
+    inc = colored("1.Income", "green")
+    exp = colored("2.Expense", "red")
+    print(f"{inc} or {exp}?")
     valid = 2
     answer = validate_value(valid)
     if answer == 1:
@@ -183,8 +198,10 @@ def specific_time_checker(income, expenses):
         sheet = expenses
 
     print("Chose how many days back you want to see ie.")
-    print("'7' for 7 days or '30' for 30 days")
-    days = int(input())
+    sel = "'7' for 7 days or '30' for 30 days"
+    cprint(sel, "yellow")
+    valid = None
+    days = validate_value(valid)
     data = sheet
 
     past = date.today() - timedelta(days)
@@ -198,9 +215,13 @@ def specific_time_checker(income, expenses):
     money = 0
     for amount in newlist:
         money += amount
-    if sheet == "income":
+    if sheet == income:
+        money = colored(money, "green")
+        days = colored(days, "yellow")
         print(f"You have earned €{money} in the last {days} days")
     else:
+        money = colored(money, "red")
+        days = colored(days, "yellow")
         print(f"You have spent €{money} in the last {days} days")
     input("Press Enter to go back to the main menu...\n")
 
@@ -211,10 +232,10 @@ def update_worksheet(data, worksheet):
     that are to be inserted in the relevant worksheet.
     """
 
-    print("Updating Worksheet...")
+    cprint("Updating Worksheet...", "yellow")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
-    print("Update successful")
+    cprint("Update successful!", "green")
     input("Press Enter to go back to the main menu...\n")
 
 
@@ -258,25 +279,28 @@ def main():
     It then calls the correct function that the user selected. When the
     user is done, they have an option to exit the program.
     """
-
-    print("Welcome to your personal expense tracker!")
+    intro = "Welcome to your personal expense tracker!"
+    print(colored(intro, "cyan", attrs=["bold"]))
     print("Please wait while we load everything up...")
+
     income_data, expense_data, unique_users = get_data()
     time.sleep(1)
     answer = get_username(unique_users)
-    print("What would you like to do today?")
 
     while True:
         if answer == "n":
             print("Goodbye!")
             break
 
-        print("The following options are available to you!\n")
-        print("Option 1 - Show expenses and income")
-        print("Option 2 - Input Your Income / Expenses")
-        print("Option 3 - Check specific days ago")
-        print("Option 4 - Exit")
-        print("Please input a value '1', '2', '3' or '4' to select an option:")
+        opt = colored("Option", "green")
+        wel = "The following options are available for you "
+        cprint(f"{wel}{active_user[0]}!", "cyan", attrs=["bold"])
+        print(f"{opt} {colored('1', 'green')} - Show expenses and income")
+        print(f"{opt} {colored('2', 'green')} - Input Your Income / Expenses")
+        print(f"{opt} {colored('3', 'green')} - Check specific days ago")
+        print(f"{opt} {colored('4', 'green')} - Exit")
+        sel = "Please input a value '1', '2', '3' or '4' to select an option:"
+        cprint(sel, "yellow")
         valid = 4
         option = validate_value(valid)
 
@@ -302,11 +326,3 @@ def main():
 
 
 main()
-
-
-# usernames1 = income_data.col_values(1)
-# print(income_data)
-
-# text = colored("Hello, World!", "red", )
-# print(colored("Wrong Answer!", "red", attrs=["reverse"]))
-# print(text)
