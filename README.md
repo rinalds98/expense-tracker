@@ -94,3 +94,34 @@ The app 'Expense Tracker' is a simple app that tracks income / expenses that the
     ![Main Screen](#mainscreen)
 
 <div id='testing'/>
+
+Testing
+=
+
+## **Solved Bugs**
+- when the user inputed a username but it wasn't in the spreadsheet. It would ask if they wanted to use the specific username they selected. If the user selected "no" the main screen would still show with all of the options.
+
+## **Unfixed Bugs**
+- No bugs remaining.
+
+## **Validator Testing**
+
+- **Testing**
+    - PEP8online.com was down during testing so I installed pycodestyle in VSCode. Then I searched for Linter and selected 'pycodestyle'. This showed if I had any errors which as of deployment is error free.
+    
+    ![Linter Check](#imagetesting)
+
+## **Manual Testing**
+The Following was tested manually and passed:
+
+- **Username Input**
+    - By adding a new username it gets stored in local storage until the user adds an income / expense entry where the username is displayed and saved.
+- **Options**
+    - The main menu options work as intended selecting the correct function when selected.
+    - When an option is selected by inputing a value. The value is checked against a validator so no incorrect option or invalid value has been pressed.
+    - the exit option ends the program.
+- **Income / Expense Checking**
+    - With multiple users in the spreadsheet. Only the specific users entries are shown correctly.
+    - When inputing the amount. It only allows positive values and anything higher than zero to be inputted.
+
+<div id='deployment'/>
