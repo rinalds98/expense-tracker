@@ -151,3 +151,12 @@ Technologies Used
     - Gspread Module and google.oauth2.service_account - To be able to access spreadsheet from google spreadsheet.
 
 <div id='credits'/>
+
+Credits
+=
+
+## **Content**
+- To track time and to be able to convert between datetime class and string I used this website to gain insight into how to do it
+    - https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
+
+- Code Institute the deployment terminal.
