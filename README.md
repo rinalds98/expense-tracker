@@ -74,3 +74,23 @@ User Experience
     - General welcome text would be cyan.
 
 <div id='features'/>
+
+Features
+=
+The app 'Expense Tracker' is a simple app that tracks income / expenses that the user inputs. Even though it looks very simple on the outside there are a lot of things working in the background so the user can have a pleasant experience while using the app.
+
+- ## **Start Screen**
+    - When first starting the app. The user will be first greeted with a start screen that asks the user for their username so they can access their data.
+    
+    ![Start Screen](#startscreen)
+
+- ## **Main Game Area**
+    - After the username has been verified and the user has logged on. They will be greeted with 4 options:
+     Show expenses and income
+     Input Your Income / Expenses
+     Check specific days ago
+     Exit
+
+    ![Main Screen](#mainscreen)
+
+<div id='testing'/>
