@@ -125,3 +125,15 @@ The Following was tested manually and passed:
     - When inputing the amount. It only allows positive values and anything higher than zero to be inputted.
 
 <div id='deployment'/>
+Deployment
+=
+
+**The app was deployed using Code Institute's mock terminal for Heroku. The steps to deploy are as follows:**
+- Create a new Heroku app.
+- Set the buildbacks for Python and NodeJS in that order.
+- Link Heroku app to repository.
+- Click on Deploy. 
+
+The live link can be found here [Expense Tracker](#livelink "Expense Tracker").
+
+<div id='technologies'/>
