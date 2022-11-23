@@ -15,6 +15,7 @@ The website can be viewed here: [Expense Tracker](#liveLink "Expense Tracker").
 
 # Table of contents
 - [User Experience](#userexperience)
+- [How To Use](#how-to-use)
 - [Features](#features)
 - [Testing](#testing)
 - [Deployment](#deployment)
@@ -72,6 +73,11 @@ User Experience
     - Any errors or invalid values chosen - the color would be red.
     - confirmation text would be green.
     - General welcome text would be cyan.
+
+<div id='how-to-use'/>
+How To Use
+=
+inforinforinforinfo
 
 <div id='features'/>
 
