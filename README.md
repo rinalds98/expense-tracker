@@ -82,7 +82,7 @@ The app 'Expense Tracker' is a simple app that tracks income / expenses that the
 - ## **Start Screen**
     - When first starting the app. The user will be first greeted with a start screen that asks the user for their username so they can access their data.
     
-    ![Start Screen](#startscreen)
+    ![Start Screen](assets/images/startscreen.png)
 
 - ## **Main Game Area**
     - After the username has been verified and the user has logged on. They will be greeted with 4 options:
@@ -91,7 +91,7 @@ The app 'Expense Tracker' is a simple app that tracks income / expenses that the
      Check specific days ago
      Exit
 
-    ![Main Screen](#mainscreen)
+    ![Main Screen](assets/images/mainmenu.png)
 
 <div id='testing'/>
 
@@ -108,8 +108,9 @@ Testing
 
 - **Testing**
     - PEP8online.com was down during testing so I installed pycodestyle in VSCode. Then I searched for Linter and selected 'pycodestyle'. This showed if I had any errors which as of deployment is error free.
+    - The 3 problems that are shown are not related to the project itself. They are from the Code Institute template.
     
-    ![Linter Check](#imagetesting)
+    ![Linter Check](assets/images/errorfree.png)
 
 ## **Manual Testing**
 The Following was tested manually and passed:
@@ -146,7 +147,8 @@ Technologies Used
 
 - ## Modules
     - OS Module - To clear the screen after specific actions done by the user to keep the terminal clean and tidy.
-    - Time Module - To keep track of time to be able to have income / expense entries witha  time stamp.
+    - Date Time Module - To keep track of time to be able to have income / expense entries witha  time stamp.
+    - Time Module - To slow down the program after specific actions taken, so the user can see what is happening.
     - Termcolor Module - To add color and visual design to the terminal
     - Gspread Module and google.oauth2.service_account - To be able to access spreadsheet from google spreadsheet.
 
@@ -158,5 +160,8 @@ Credits
 ## **Content**
 - To track time and to be able to convert between datetime class and string I used this website to gain insight into how to do it
     - https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
+    - ![DateTime Credits](assets/images/datetime-credits.png)
+- To get the google sheets API set up. I used code institutes video tutorial and took this code for use in my project.
+ - ![Code Institute Credits](assets/images/code-institute-code.png)
 
-- Code Institute the deployment terminal.
+- Code Institute - the deployment terminal.
