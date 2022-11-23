@@ -17,8 +17,8 @@ from google.oauth2.service_account import Credentials
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+    "https://www.googleapis.com/auth/drive",
+]
 
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -59,18 +59,16 @@ def get_username(unique_users):
     is used to get that specific users data or input new data under
     their username.
     """
+
     def mini_validator():
         """
         Helper function that checks and validates the values
         that the users inputs as to not cause a value error.
         """
-        dict = {
-            "yes": "y",
-            "no": "n"
-        }
+        dict = {"yes": "y", "no": "n"}
 
         while True:
-            answer = input()
+            answer = input().lower()
             if answer in dict.values():
                 return answer
             else:
@@ -209,7 +207,7 @@ def specific_time_checker(income, expenses):
     for i, j, k, l in reversed(data):
         if i == active_user[0]:
             date_str = j
-            date_object = datetime.strptime(date_str, '%m/%d/%Y').date()
+            date_object = datetime.strptime(date_str, "%m/%d/%Y").date()
             if past < date_object:
                 newlist.append(int(l))
     money = 0
