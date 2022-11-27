@@ -1,6 +1,6 @@
 """
-This project is a simple expense tracker for personal use. It tracks the users
-expenses and income. The user can input their incoem and expenses in the
+This project is a simple expense tracker for personal use. It tracks the user's
+expenses and income. The user can input their income and expenses in the
 terminal. Check how much they have spent or saved.
 """
 
@@ -53,17 +53,17 @@ def get_data():
 
 def get_username(unique_users):
     """
-    Asks user for their username and checks the google spreadsheet
+    Asks users for their username and checks the google spreadsheet
     if it has been used previously. If it has it welcomes them. If not
-    it creates it. the user gets added to a 'active users' variable which
-    is used to get that specific users data or input new data under
+    it creates it. the user gets added to an 'active users' variable which
+    is used to get that specific user's data or input new data under
     their username.
     """
 
     def mini_validator():
         """
         Helper function that checks and validates the values
-        that the users inputs as to not cause a value error.
+        that the user inputs to not cause a value error.
         """
         dict = {"yes": "y", "no": "n"}
 
@@ -181,8 +181,8 @@ def input_income_expense():
 def specific_time_checker(income, expenses):
     """
     Asks the user if they wish to check their
-    income / expenses. The function allows the user
-    to check specific amount of days ago how much they
+    income/expenses. The function allows the user
+    to check a specific amount of days ago and how much they
     have spent or earned.
     """
     inc = colored("1.Income", "green")
@@ -226,8 +226,8 @@ def specific_time_checker(income, expenses):
 
 def update_worksheet(data, worksheet):
     """
-    Receives a list containing (date,type of expense and amount)
-    that are to be inserted in the relevant worksheet.
+    Receives a list containing (date, type of expense, and amount)
+    that is to be inserted in the relevant worksheet.
     """
 
     cprint("Updating Worksheet...", "yellow")
@@ -240,8 +240,8 @@ def update_worksheet(data, worksheet):
 def validate_value(valid):
     """
     Inside the try, asks to input an integer value
-    Raises ValueError if anything but an integers is added
-    and if its within the range of options.
+    Raises ValueError if anything but an integer is added
+    and if it's within the range of options.
     """
 
     while True:
@@ -273,9 +273,9 @@ def main():
     """
     This is the main function that loads on startup. it prints
     what options are available to the user. When the user
-    types in a value, it gets checked to see if its a valid option.
+    types in a value, it gets checked to see if it is a valid option.
     It then calls the correct function that the user selected. When the
-    user is done, they have an option to exit the program.
+    user is done, they have the option to exit the program.
     """
     intro = "Welcome to your personal expense tracker!"
     print(colored(intro, "cyan", attrs=["bold"]))
