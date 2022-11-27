@@ -11,7 +11,7 @@ Users of the app will be able to track their spending habits and how much they h
 
 ![Photo of the website on multiple different screens](#amiresponsiveimage)
 
-The website can be viewed here: [Expense Tracker](#liveLink "Expense Tracker").
+The website can be viewed here: [Expense Tracker](https://expense-tracker-rz.herokuapp.com/ "Expense Tracker").
 
 # Table of contents
 - [User Experience](#userexperience)
@@ -79,6 +79,15 @@ User Experience
 
 How To Use
 =
+# Data Used
+ - Both income and expense data is structured in the same way. It has the username, date, description and amount.
+ - The worksheets that are supplied have 2 users, Tom and Jane. each with different income and expenses. When running the program if you input tom as the username you will be able to view and add Toms income and expenses and likewise for Jane.
+ ## - Income Data
+ ![income Data](assets/images/income-data.png) 
+
+ ## - Expense Data
+ ![Expense Data](assets/images/expense-data.png)
+
 # 1. Upon Runtime
 - Once the program is started it will ask the user to enter a username.
     - The username gets checked against previous entries in google sheets.
@@ -97,6 +106,7 @@ How To Use
   - Very similar to option 1. The only difference is that the program will ask the user how many days back they wish to see their income/expense. ie. inputting 7 will result in showing the user how much they have spent/earned in the last 7 days.
  ## - Option 4: Exit.
   - Allows the user to exit the program without crashing it.
+
 
 <div id='features'/>
 
@@ -173,7 +183,7 @@ Deployment
 - Link the Heroku app to the repository.
 - Click on Deploy. 
 
-The live link can be found here [Expense Tracker](#livelink "Expense Tracker").
+The live link can be found here [Expense Tracker](https://expense-tracker-rz.herokuapp.com/ "Expense Tracker").
 
 <div id='technologies'/>
 
