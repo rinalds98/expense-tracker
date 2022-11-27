@@ -109,7 +109,7 @@ The app Expense Tracker is a simple app that tracks the income/expenses that the
     
     ![Start Screen](assets/images/startscreen.png)
 
-- ## **Main Game Area**
+- ## **Main Screen Area**
     - After the username has been verified and the user has logged on. They will be greeted with 4 options:
      Show expenses and income
      Input Your Income / Expenses
@@ -125,6 +125,10 @@ Future Development
 
 ## **Further Development**
  - When the program first gets initiated it pulls all of the information from google sheets which works great with small amounts of data but would slow the program down if there were many entries. Further development would include; after the user has inputted their username it would check against a list of active usernames. Then it would parse through the income/expense sheet to pull only the specific user's information.
+ - Currently, any new income/expense entries are time-stamped with the current time. Further development into adding backtracked payments or expenses would be beneficial to add. This would add more flexibility to the program.
+
+ ## **Reasons they are not currently not implemented**
+ - Due to the time constraints and scope of the project. I would not have enough time to develop and test these new functions before the project deadline.
 
 
 <div id='testing'/>
