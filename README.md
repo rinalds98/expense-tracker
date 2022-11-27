@@ -17,6 +17,7 @@ The website can be viewed here: [Expense Tracker](#liveLink "Expense Tracker").
 - [User Experience](#userexperience)
 - [How To Use](#how-to-use)
 - [Features](#features)
+- [Future Ideas / Development](#future)
 - [Testing](#testing)
 - [Deployment](#deployment)
 - [Technologies Used](#technologies)
@@ -62,9 +63,9 @@ User Experience
 
 # 4. Skeleton
 ## **Wireframes**
-- The initial designs were made with pen and paper.
+- The initial design was made using Lucid Charts.
 
-![Initial Designs](#photo)
+![Lucid Charts](assets/images/lucidchart.png)
 
 # 5. Surface
  - ## **Color**
@@ -75,9 +76,27 @@ User Experience
     - General welcome text would be cyan.
 
 <div id='how-to-use'/>
+
 How To Use
 =
-inforinforinforinfo
+# 1. Upon Runtime
+- Once the program is started it will ask the user to enter a username.
+    - The username gets checked against previous entries in google sheets.
+- If its a new user it will confirm if the user wants this as their username.
+# 2. Main Screen
+- There are 4 options for the user to choose from. The yellow color indicates what the user should do to activate the option.
+- using the numbers (1,2,3,4) to select an option. If the user inputs an invalid value an error will be displayed saying "incorect value".
+# 3. Options
+ ## - Option 1: Show expenses and income.
+  - This option will display the users total income and expenses that they inputted. It will also display how much they have saved. A green or red color of the value will denote if it is a negative or positive value as a visual referance.
+ ## - Option 2: Input Your Income / Expenses.
+  - This option will allow the user to input an expense or income. Once they have selected their desired option the program will ask what type of income/expense they wish to add such as (income (salary, other)), (expense(entertainment, bills, food, transportation)).
+  - The program will then ask the user to input the amount.
+  - Once the user clicks enter, the google worksheet will be updated with the values supplied.
+ ## - Option 3: Check Specific Days Ago.
+  - Very similar to option 1. The only difference is that the program will ask the user how many days back they wish to see their income/expense. ie. inputing 7 will result in showing the user how much they have spent/earned in the last 7 days.
+ ## - Option 4: Exit.
+  - Allows the user to exit the program without crashing it.
 
 <div id='features'/>
 
@@ -98,6 +117,15 @@ The app 'Expense Tracker' is a simple app that tracks income / expenses that the
      Exit
 
     ![Main Screen](assets/images/mainmenu.png)
+
+<div id='future'/>
+
+Future Development
+=
+
+## **Further Development**
+ - When the program first gets initiallied it pulls all of the information from google sheets which works great with small amounts of data but would really slow the program down if their was many entries. Further development would include; after the user has inputted their username it would check against a list of active username. Then it would parse through the income/expense sheet to pull only the specific users information.
+
 
 <div id='testing'/>
 
