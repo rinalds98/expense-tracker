@@ -3,13 +3,12 @@ Expense Tracker
 
 Introduction
 =
+
 Expense Tracker is a simple tracker that tracks your spending and income. You can add a username so multiple users can use the expense tracker. The user can check their total earned/saved. Be more specific with checking spending in the last few days to a month. inputting their income/expenses.
 
 
 Users of the app will be able to track their spending habits and how much they have saved. 
 
-
-![Photo of the website on multiple different screens](#amiresponsiveimage)
 
 The website can be viewed here: [Expense Tracker](https://expense-tracker-rz.herokuapp.com/ "Expense Tracker").
 
@@ -27,6 +26,7 @@ The website can be viewed here: [Expense Tracker](https://expense-tracker-rz.her
 
 User Experience
 =
+
 ## **User Stories**
 - ## **As an app owner I want that:**
 
@@ -52,7 +52,7 @@ User Experience
 - Each user can make their username to track their spending.
 
 # 2. Scope
-- After a few design choices. an elegant 4 option the main screen was chosen where users can choose what they want to do.
+- After a few design choices. An elegant 4-option main-screen was chosen where users can choose what they want to do.
 - Adding color to add a visual distinction for different options.
 
 # 3. Structure
@@ -62,7 +62,7 @@ User Experience
 - When the user is done using the expense tracker. There would be an exit option.
 
 # 4. Skeleton
-## **Wireframes**
+## **Design**
 - The initial design was made using Lucid Charts.
 
 ![Lucid Charts](assets/images/lucidchart.png)
@@ -79,9 +79,10 @@ User Experience
 
 How To Use
 =
-# Data Used
- - Both income and expense data is structured in the same way. It has the username, date, description and amount.
- - The worksheets that are supplied have 2 users, Tom and Jane. each with different income and expenses. When running the program if you input tom as the username you will be able to view and add Toms income and expenses and likewise for Jane.
+
+## Data Used
+ - Both income and expense data are structured in the same way. It has the username, date, description, and amount.
+ - The worksheets that are supplied have 2 users, Tom and Jane. each with different income and expenses. When running the program if you input tom as the username you will be able to view and add Tom's income and expenses and likewise for Jane.
  ## - Income Data
  ![income Data](assets/images/income-data.png) 
 
@@ -97,7 +98,7 @@ How To Use
 - using the number (1,2,3,4) to select an option. If the user inputs an invalid value an error will be displayed saying "incorrect value".
 # 3. Options
  ## - Option 1: Show expenses and income.
-  - This option will display the user's total income and expenses that they inputted. It will also display how much they have saved. A green or red color of the value will denote if it is a negative or positive value as a visual reference.
+  - This option will display the user's total income and expenses that they inputted. It will also display how much they have saved. A green or red color of the value will denote if it is a positive or negative value as a visual reference.
  ## - Option 2: Input Your Income / Expenses.
   - This option will allow the user to input an expense or income. Once they have selected their desired option the program will ask what type of income/expense they wish to add such as (income (salary, other)), (expense(entertainment, bills, food, transportation)).
   - The program will then ask the user to input the amount.
@@ -112,6 +113,7 @@ How To Use
 
 Features
 =
+
 The app Expense Tracker is a simple app that tracks the income/expenses that the user inputs. Even though it looks very simple on the outside there are a lot of things working in the background so the user can have a pleasant experience while using the app.
 
 - ## **Start Screen**
@@ -174,6 +176,7 @@ The Following was tested manually and passed:
     - When inputting the amount. It only allows positive values and anything higher than zero to be inputted.
 
 <div id='deployment'/>
+
 Deployment
 =
 
@@ -206,10 +209,12 @@ Credits
 =
 
 ## **Content**
+
 - To track time and to be able to convert between DateTime class and string I used this website to gain insight into how to do it
     - https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
     -![DateTime Credits](assets/images/datetime-credits.png)
+
 - To get the google sheets API set up. I used Code Institutes video tutorial and took this code for use in my project.
- -![Code Institute Credits](assets/images/code-institute-code.png)
+    -![Code Institute Credits](assets/images/code-institute-code.png)
 
 - Code Institute - the deployment terminal.
