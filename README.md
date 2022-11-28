@@ -130,6 +130,10 @@ The app Expense Tracker is a simple app that tracks the income/expenses that the
 
     ![Main Screen](assets/images/mainmenu.png)
 
+- ## **Validation**
+    - When the user has to select an option. There has been validation implemented so if the user inputs an invalid value or option a warning will show up.
+    ![Validation](assets/images/validation.png)
+
 <div id='future'/>
 
 Future Development
